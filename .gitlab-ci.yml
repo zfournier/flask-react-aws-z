@@ -47,7 +47,7 @@ build:heroku:
     - docker:dind
   variables:
     DOCKER_DRIVER: overlay2
-    HEROKU_APP_NAME: young-meadow-12799
+    HEROKU_APP_NAME: immense-refuge-27069
     HEROKU_REGISTRY_IMAGE: registry.heroku.com/${HEROKU_APP_NAME}/web
   script:
     - apk add --no-cache curl
