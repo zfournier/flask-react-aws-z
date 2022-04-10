@@ -147,7 +147,9 @@ def test_update_user(test_app, test_database, add_user):
     client = test_app.test_client()
     resp_one = client.put(
         f"/users/{user.id}",
-        data=json.dumps({"username": "me", "email": "me@testdriven.io", "active": True}),
+        data=json.dumps(
+            {"username": "me", "email": "me@testdriven.io", "active": True}
+        ),
         content_type="application/json",
     )
     data = json.loads(resp_one.data.decode())

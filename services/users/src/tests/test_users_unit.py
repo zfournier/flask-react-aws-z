@@ -201,7 +201,9 @@ def test_update_user(test_app, monkeypatch):
 
     def mock_get_user_by_id(user_id):
         d = AttrDict()
-        d.update({"id": 1, "username": "me", "email": "me@testdriven.io", "active": True})
+        d.update(
+            {"id": 1, "username": "me", "email": "me@testdriven.io", "active": True}
+        )
         return d
 
     def mock_update_user(user, username, email, active=None):
@@ -218,7 +220,9 @@ def test_update_user(test_app, monkeypatch):
     client = test_app.test_client()
     resp_one = client.put(
         "/users/1",
-        data=json.dumps({"username": "me", "email": "me@testdriven.io", "active": True}),
+        data=json.dumps(
+            {"username": "me", "email": "me@testdriven.io", "active": True}
+        ),
         content_type="application/json",
     )
     data = json.loads(resp_one.data.decode())
@@ -230,6 +234,7 @@ def test_update_user(test_app, monkeypatch):
     assert "me" in data["username"]
     assert "me@testdriven.io" in data["email"]
     assert data["active"] is True
+
 
 @pytest.mark.parametrize(
     "user_id, payload, status_code, message",
