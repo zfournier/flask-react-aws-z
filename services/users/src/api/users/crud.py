@@ -21,9 +21,11 @@ def add_user(username, email, password):
     return user
 
 
-def update_user(user, username, email):
+def update_user(user, username, email, active=None):
     user.username = username
     user.email = email
+    if active is not None:
+        user.active = active
     db.session.commit()
     return user
 

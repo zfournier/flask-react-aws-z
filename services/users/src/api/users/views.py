@@ -19,6 +19,7 @@ user = users_namespace.model(
         "id": fields.Integer(readOnly=True),
         "username": fields.String(required=True),
         "email": fields.String(required=True),
+        "active": fields.Boolean(required=False),
         "created_date": fields.DateTime,
     },
 )
@@ -75,6 +76,8 @@ class Users(Resource):
         post_data = request.get_json()
         username = post_data.get("username")
         email = post_data.get("email")
+        active = post_data.get("active", None)
+
         response_object = {}
 
         user = get_user_by_id(user_id)
@@ -85,7 +88,7 @@ class Users(Resource):
             response_object["message"] = "Sorry. That email already exists."
             return response_object, 400
 
-        update_user(user, username, email)
+        update_user(user, username, email, active)
 
         response_object["message"] = f"{user.id} was updated!"
         return response_object, 200
